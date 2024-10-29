@@ -7,6 +7,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 import math
 import random
+import time
 
 
 def startup():
@@ -45,7 +46,7 @@ def gety(u,v):
 def getz(u,v):
     return (-90 * pow(u,5) + 225 * pow(u,4) - 270 * pow(u,3) +180 * pow(u,2) - 45*u) * math.sin(math.pi*v)
 
-N = 30
+N = 31
 points = [[[0] * 3 for i in range(N+1)] for j in range(N+1)];
 clrs = [[[0.0] * 3 for i in range(N+1)] for j in range(N+1)];
 def colors(N):
@@ -64,6 +65,7 @@ def fillpoints(N):
             points[i][j][2]= getz(i/N,j/N)
 
 fillpoints(N)
+colors(N)
 def spin(angle):
     glRotatef(angle,1.0,0.0,0.0)
     glRotatef(angle,0.0,1.0,0.0)
@@ -75,18 +77,40 @@ def render(time):
     spin(time * 180 / 3.1415)
     glPointSize(5)
     # axes()
-    glBegin(GL_LINES)
+    glBegin(GL_TRIANGLES)
     # glVertex3f(0,0,1)
     # glVertex3f(0,-5,1)
     for i in range(N):
         for j in range(N):
-            glColor3f(points[i][j][0],points[i][j][1],points[i][j][2])
+            glColor3fv(clrs[i+1][j+1])
 
-            glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
-            glVertex3f(points[i+1][j][0],points[i+1][j][1],points[i+1][j][2])
+            glVertex3fv(points[i][j])
+            glVertex3fv(points[i+1][j])
+            glVertex3fv(points[i][j+1])
 
-            glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
-            glVertex3f(points[i][j+1][0],points[i][j+1][1],points[i][j+1][2])
+            glVertex3fv(points[i+1][j+1])
+            glVertex3fv(points[i][j+1])
+            glVertex3fv(points[i+1][j])
+
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+            # glVertex3f(points[i+1][j][0],points[i+1][j][1],points[i+1][j][2])
+
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+            # glVertex3f(points[i][j+1][0],points[i][j+1][1],points[i][j+1][2])
+
+
+            # # odwrotny trójkąt
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+            # glVertex3f(points[i+1][j+1][0],points[i+1][j+1][1],points[i+1][j+1][2])
+
+            # glVertex3f(points[i][j+1][0],points[i][j+1][1],points[i][j+1][2])
+            # glVertex3f(points[i][j+1][0],points[i][j+1][1],points[i][j+1][2])
     glEnd()
     glFlush()
 
