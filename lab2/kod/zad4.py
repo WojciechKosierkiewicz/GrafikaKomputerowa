@@ -50,19 +50,19 @@ N = 31
 points = [[[0] * 3 for i in range(N+1)] for j in range(N+1)];
 clrs = [[[0.0] * 3 for i in range(N+1)] for j in range(N+1)];
 def colors(N):
-    for i in range(N+1):
-        for j in range(N+1):
+    for i in range(N):
+        for j in range(N):
             random.seed(i*j)
             clrs[i][j][0]= random.uniform(0.0,1.0)
             clrs[i][j][1]= random.uniform(0.0,1.0)
             clrs[i][j][2]= random.uniform(0.0,1.0)
 
 def fillpoints(N):
-    for i in range(N+1):
-        for j in range(N+1):
-            points[i][j][0]= getx(i/N,j/N)
-            points[i][j][1]= gety(i/N,j/N)
-            points[i][j][2]= getz(i/N,j/N)
+    for i in range(N):
+        for j in range(N):
+            points[i][j][0]= getx(i/(N-1),j/(N-1))
+            points[i][j][1]= gety(i/(N-1),j/(N-1))
+            points[i][j][2]= getz(i/(N-1),j/(N-1))
 
 fillpoints(N)
 colors(N)
@@ -86,12 +86,28 @@ def render(time):
 
             glVertex3fv(points[i][j])
             glVertex3fv(points[i+1][j])
-            glVertex3fv(points[i+1][j+1])
-
-            glVertex3fv(points[i][j])
-            glVertex3fv(points[i+1][j+1])
             glVertex3fv(points[i][j+1])
+            glVertex3fv(points[i+1][j+1])
 
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+            # glVertex3f(points[i+1][j][0],points[i+1][j][1],points[i+1][j][2])
+
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+            # glVertex3f(points[i][j+1][0],points[i][j+1][1],points[i][j+1][2])
+
+
+            # # odwrotny trójkąt
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+
+            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+            # glVertex3f(points[i+1][j+1][0],points[i+1][j+1][1],points[i+1][j+1][2])
+
+            # glVertex3f(points[i][j+1][0],points[i][j+1][1],points[i][j+1][2])
+            # glVertex3f(points[i][j+1][0],points[i][j+1][1],points[i][j+1][2])
     glEnd()
     glFlush()
 
