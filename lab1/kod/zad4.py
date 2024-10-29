@@ -56,7 +56,7 @@ def render(time):
     glClear(GL_COLOR_BUFFER_BIT)
 
 
-    sierpinski(4,200,200)
+    sierpinski(6,200,200)
 
 
     glFlush()
