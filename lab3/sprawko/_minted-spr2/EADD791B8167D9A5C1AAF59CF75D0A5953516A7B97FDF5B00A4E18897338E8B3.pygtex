@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{getx}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{n}{v}\PYG{p}{):}
+    \PYG{k}{return} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{90} \PYG{o}{*} \PYG{n+nb}{pow}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{225} \PYG{o}{*} \PYG{n+nb}{pow}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{270} \PYG{o}{*} \PYG{n+nb}{pow}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{)}
+     \PYG{o}{+} \PYG{l+m+mi}{180} \PYG{o}{*} \PYG{n}{u}\PYG{o}{*}\PYG{n}{u} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{45}\PYG{o}{*}\PYG{n}{u}\PYG{p}{)}\PYG{o}{*}\PYG{n}{math}\PYG{o}{.}\PYG{n}{cos}\PYG{p}{(}\PYG{n}{math}\PYG{o}{.}\PYG{n}{pi}\PYG{o}{*}\PYG{n}{v}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{gety}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{n}{v}\PYG{p}{):}
+    \PYG{k}{return} \PYG{p}{(}\PYG{l+m+mi}{160} \PYG{o}{*} \PYG{n+nb}{pow}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{320} \PYG{o}{*} \PYG{n+nb}{pow}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{)}
+     \PYG{o}{+} \PYG{l+m+mi}{160} \PYG{o}{*} \PYG{n}{u} \PYG{o}{*} \PYG{n}{u} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{5}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{getz}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{n}{v}\PYG{p}{):}
+    \PYG{k}{return} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{90} \PYG{o}{*} \PYG{n+nb}{pow}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{l+m+mi}{5}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mi}{225} \PYG{o}{*} \PYG{n+nb}{pow}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{270} \PYG{o}{*} \PYG{n+nb}{pow}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{)}
+     \PYG{o}{+}\PYG{l+m+mi}{180} \PYG{o}{*} \PYG{n+nb}{pow}\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{45}\PYG{o}{*}\PYG{n}{u}\PYG{p}{)} \PYG{o}{*} \PYG{n}{math}\PYG{o}{.}\PYG{n}{sin}\PYG{p}{(}\PYG{n}{math}\PYG{o}{.}\PYG{n}{pi}\PYG{o}{*}\PYG{n}{v}\PYG{p}{)}
+\end{Verbatim}

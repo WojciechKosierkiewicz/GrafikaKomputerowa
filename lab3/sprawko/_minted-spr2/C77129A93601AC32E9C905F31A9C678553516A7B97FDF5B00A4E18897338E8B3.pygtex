@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{N} \PYG{o}{=} \PYG{l+m+mi}{100}
+\PYG{n}{points} \PYG{o}{=} \PYG{p}{[[[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{*} \PYG{l+m+mi}{3} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{N}\PYG{p}{)]} \PYG{k}{for} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{N}\PYG{p}{)];}
+
+\PYG{k}{def} \PYG{n+nf}{fillpoints}\PYG{p}{(}\PYG{n}{N}\PYG{p}{):}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{N}\PYG{p}{):}
+        \PYG{k}{for} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{N}\PYG{p}{):}
+            \PYG{k}{if} \PYG{n}{i} \PYG{o}{!=} \PYG{l+m+mi}{0} \PYG{o+ow}{and} \PYG{n}{j} \PYG{o}{!=} \PYG{l+m+mi}{0}\PYG{p}{:}
+                \PYG{n}{points}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{=} \PYG{n}{getx}\PYG{p}{(}\PYG{n}{i}\PYG{o}{/}\PYG{n}{N}\PYG{p}{,}\PYG{n}{j}\PYG{o}{/}\PYG{n}{N}\PYG{p}{)}
+                \PYG{n}{points}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{=} \PYG{n}{gety}\PYG{p}{(}\PYG{n}{i}\PYG{o}{/}\PYG{n}{N}\PYG{p}{,}\PYG{n}{j}\PYG{o}{/}\PYG{n}{N}\PYG{p}{)}
+                \PYG{n}{points}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{o}{=} \PYG{n}{getz}\PYG{p}{(}\PYG{n}{i}\PYG{o}{/}\PYG{n}{N}\PYG{p}{,}\PYG{n}{j}\PYG{o}{/}\PYG{n}{N}\PYG{p}{)}
+\end{Verbatim}

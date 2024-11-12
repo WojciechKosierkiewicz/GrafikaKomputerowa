@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{N}\PYG{p}{):}
+	\PYG{k}{for} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{N}\PYG{p}{):}
+		\PYG{n}{glColor3fv}\PYG{p}{(}\PYG{n}{clrs}\PYG{p}{[}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{][}\PYG{n}{j}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{])}
+		
+		\PYG{n}{glVertex3fv}\PYG{p}{(}\PYG{n}{points}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{])}
+		\PYG{n}{glVertex3fv}\PYG{p}{(}\PYG{n}{points}\PYG{p}{[}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{][}\PYG{n}{j}\PYG{p}{])}
+		\PYG{n}{glVertex3fv}\PYG{p}{(}\PYG{n}{points}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{])}
+		\PYG{n}{glVertex3fv}\PYG{p}{(}\PYG{n}{points}\PYG{p}{[}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{][}\PYG{n}{j}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{])}
+\end{Verbatim}

@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{spin}\PYG{p}{(}\PYG{n}{angle}\PYG{p}{):}
+    \PYG{n}{glRotatef}\PYG{p}{(}\PYG{n}{angle}\PYG{p}{,}\PYG{l+m+mf}{1.0}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{)}
+    \PYG{n}{glRotatef}\PYG{p}{(}\PYG{n}{angle}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{,}\PYG{l+m+mf}{1.0}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{)}
+    \PYG{n}{glRotatef}\PYG{p}{(}\PYG{n}{angle}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{,}\PYG{l+m+mf}{1.0}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{render}\PYG{p}{(}\PYG{n}{time}\PYG{p}{):}
+    \PYG{n}{glClear}\PYG{p}{(}\PYG{n}{GL\PYGZus{}COLOR\PYGZus{}BUFFER\PYGZus{}BIT} \PYG{o}{|} \PYG{n}{GL\PYGZus{}DEPTH\PYGZus{}BUFFER\PYGZus{}BIT}\PYG{p}{)}
+    \PYG{n}{glLoadIdentity}\PYG{p}{()}
+    \PYG{n}{spin}\PYG{p}{(}\PYG{n}{time} \PYG{o}{*} \PYG{l+m+mi}{180} \PYG{o}{/} \PYG{l+m+mf}{3.1415}\PYG{p}{)}
+    \PYG{n}{glPointSize}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}
+    \PYG{n}{axes}\PYG{p}{()}
+    \PYG{n}{glBegin}\PYG{p}{(}\PYG{n}{GL\PYGZus{}POINTS}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{N}\PYG{p}{):}
+        \PYG{k}{for} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{N}\PYG{p}{):}
+            \PYG{n}{glColor3f}\PYG{p}{(}\PYG{n}{random}\PYG{o}{.}\PYG{n}{uniform}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{n}{random}\PYG{o}{.}\PYG{n}{uniform}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{n}{random}\PYG{o}{.}\PYG{n}{uniform}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{))}
+            \PYG{n}{glVertex3f}\PYG{p}{(}\PYG{n}{points}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{n}{points}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{],}\PYG{n}{points}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{])}
+    \PYG{n}{glEnd}\PYG{p}{()}
+    \PYG{n}{glFlush}\PYG{p}{()}
+	
+\end{Verbatim}

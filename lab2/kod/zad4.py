@@ -5,110 +5,60 @@ from glfw.GLFW import *
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
-import math
 import random
-import time
 
 
 def startup():
-    update_viewport(None, 400, 400)
-    glClearColor(0.0, 0.0, 0.0, 1.0)
-    glEnable(GL_DEPTH_TEST)
+    update_viewport(None,200, 200)
+    glClearColor(0.5, 0.5, 0.5, 1.0)
 
 
 def shutdown():
     pass
 
 
-def axes():
-    glBegin(GL_LINES)
-
-    glColor3f(1.0, 0.0, 0.0)
-    glVertex3f(-5.0, 0.0, 0.0)
-    glVertex3f(5.0, 0.0, 0.0)
-
-    glColor3f(0.0, 1.0, 0.0)
-    glVertex3f(0.0, -5.0, 0.0)
-    glVertex3f(0.0, 5.0, 0.0)
-
-    glColor3f(0.0, 0.0, 1.0)
-    glVertex3f(0.0, 0.0, -5.0)
-    glVertex3f(0.0, 0.0, 5.0)
-
+def rectangle(x,y,a,b):
+    # glColor3f(0.5, 0.5, 0.5)
+    glBegin(GL_TRIANGLES)
+    glVertex2f(x, y)
+    glVertex2f(x, y+b)
+    glVertex2f(x+a,y)
+    x= x+a
+    y=y+b
+    # glColor3f(0, 0, 0.5)
+    glVertex2f(x, y)
+    glVertex2f(x, y-b)
+    glVertex2f(x-a,y)
     glEnd()
 
-def getx(u,v):
-    return (-90 * pow(u,5)+225 * pow(u,4) -270 * pow(u,3) + 180 * u*u - 45*u)*math.cos(math.pi*v)
-
-def gety(u,v):
-    return (160 * pow(u,4) - 320 * pow(u,3) + 160 * u * u - 5)
-
-def getz(u,v):
-    return (-90 * pow(u,5) + 225 * pow(u,4) - 270 * pow(u,3) +180 * pow(u,2) - 45*u) * math.sin(math.pi*v)
-
-N = 31
-points = [[[0] * 3 for i in range(N+1)] for j in range(N+1)];
-clrs = [[[0.0] * 3 for i in range(N+1)] for j in range(N+1)];
-def colors(N):
-    for i in range(N):
-        for j in range(N):
-            random.seed(i*j)
-            clrs[i][j][0]= random.uniform(0.0,1.0)
-            clrs[i][j][1]= random.uniform(0.0,1.0)
-            clrs[i][j][2]= random.uniform(0.0,1.0)
-
-def fillpoints(N):
-    for i in range(N):
-        for j in range(N):
-            points[i][j][0]= getx(i/(N-1),j/(N-1))
-            points[i][j][1]= gety(i/(N-1),j/(N-1))
-            points[i][j][2]= getz(i/(N-1),j/(N-1))
-
-fillpoints(N)
-colors(N)
-def spin(angle):
-    glRotatef(angle,1.0,0.0,0.0)
-    glRotatef(angle,0.0,1.0,0.0)
-    glRotatef(angle,0.0,0.0,1.0)
+def sierpinski(depth,screenx,screeny):
+    if depth==0:
+        glColor3f(0.5, 0, 0.5)
+        rectangle(-screenx/2,-screeny/2,screenx,screeny)
+        glColor3f(0.5, 0.5, 0.5)
+        return
+    else:
+       sierpinski(depth-1,screenx,screeny)
+       mystarx = -screenx/2
+       mystarty = -screeny/2
+       jumpx = screenx/pow(3,depth)
+       jumpy = screeny/pow(3,depth)
+       mystarty += jumpy
+       mystarx += jumpx
+       while mystarx < screenx/2:
+           while mystarty < screeny/2:
+               rectangle(mystarx,mystarty,jumpx,jumpy)
+               mystarty += 3*jumpy
+           mystarx += 3*jumpx
+           mystarty = -screeny/2 + jumpy
 
 def render(time):
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glLoadIdentity()
-    spin(time * 180 / 3.1415)
-    glPointSize(5)
-    # axes()
-    glBegin(GL_TRIANGLE_STRIP)
-    # glVertex3f(0,0,1)
-    # glVertex3f(0,-5,1)
-    for i in range(N):
-        for j in range(N):
-            glColor3fv(clrs[i+1][j+1])
-
-            glVertex3fv(points[i][j])
-            glVertex3fv(points[i+1][j])
-            glVertex3fv(points[i][j+1])
-            glVertex3fv(points[i+1][j+1])
-
-            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
-            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
-
-            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
-            # glVertex3f(points[i+1][j][0],points[i+1][j][1],points[i+1][j][2])
-
-            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
-            # glVertex3f(points[i][j+1][0],points[i][j+1][1],points[i][j+1][2])
+    glClear(GL_COLOR_BUFFER_BIT)
 
 
-            # # odwrotny trójkąt
-            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
-            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
+    sierpinski(6,200,200)
 
-            # glVertex3f(points[i][j][0],points[i][j][1],points[i][j][2])
-            # glVertex3f(points[i+1][j+1][0],points[i+1][j+1][1],points[i+1][j+1][2])
 
-            # glVertex3f(points[i][j+1][0],points[i][j+1][1],points[i][j+1][2])
-            # glVertex3f(points[i][j+1][0],points[i][j+1][1],points[i][j+1][2])
-    glEnd()
     glFlush()
 
 
@@ -124,9 +74,11 @@ def update_viewport(window, width, height):
     glLoadIdentity()
 
     if width <= height:
-        glOrtho(-7.5, 7.5, -7.5 / aspect_ratio, 7.5 / aspect_ratio, 7.5, -7.5)
+        glOrtho(-100.0, 100.0, -100.0 / aspect_ratio, 100.0 / aspect_ratio,
+                1.0, -1.0)
     else:
-        glOrtho(-7.5 * aspect_ratio, 7.5 * aspect_ratio, -7.5, 7.5, 7.5, -7.5)
+        glOrtho(-100.0 * aspect_ratio, 100.0 * aspect_ratio, -100.0, 100.0,
+                1.0, -1.0)
 
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
