@@ -1,0 +1,55 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{render}\PYG{p}{(}\PYG{n}{time}\PYG{p}{):}
+    \PYG{k}{global} \PYG{n}{theta}
+    \PYG{k}{global} \PYG{n}{phi}
+    \PYG{k}{global} \PYG{n}{thetas}
+    \PYG{k}{global} \PYG{n}{phis}
+    \PYG{k}{global} \PYG{n}{scale}
+    \PYG{k}{global} \PYG{n}{r}
+    \PYG{k}{global} \PYG{n}{xeye}\PYG{p}{,} \PYG{n}{yeye}\PYG{p}{,} \PYG{n}{zeye}
+    \PYG{k}{global} \PYG{n}{objclrx}\PYG{p}{,} \PYG{n}{objclry}\PYG{p}{,} \PYG{n}{objclrz}
+
+    \PYG{n}{glClear}\PYG{p}{(}\PYG{n}{GL\PYGZus{}COLOR\PYGZus{}BUFFER\PYGZus{}BIT} \PYG{o}{|} \PYG{n}{GL\PYGZus{}DEPTH\PYGZus{}BUFFER\PYGZus{}BIT}\PYG{p}{)}
+    \PYG{k}{if} \PYG{p}{(}\PYG{n}{moving} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}camera\PYGZdq{}}\PYG{p}{):}
+        \PYG{n}{objclrx} \PYG{o}{=} \PYG{l+m+mf}{1.0}
+        \PYG{n}{objclry} \PYG{o}{=} \PYG{l+m+mf}{1.0}
+        \PYG{n}{objclrz} \PYG{o}{=} \PYG{l+m+mf}{1.0}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{objclrx} \PYG{o}{=}\PYG{l+m+mf}{0.0}
+        \PYG{n}{objclry} \PYG{o}{=} \PYG{l+m+mf}{1.0}
+        \PYG{n}{objclrz} \PYG{o}{=} \PYG{l+m+mf}{1.0}
+    \PYG{n}{glLoadIdentity}\PYG{p}{()}
+
+    \PYG{k}{if} \PYG{p}{(}\PYG{n}{moving} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}camera\PYGZdq{}}\PYG{p}{):}
+        \PYG{n}{xeye}\PYG{o}{=}\PYG{n}{r}\PYG{o}{*}\PYG{n}{sin}\PYG{p}{(}\PYG{n}{theta}\PYG{o}{*}\PYG{n}{pi}\PYG{o}{/}\PYG{l+m+mi}{180}\PYG{p}{)}\PYG{o}{*}\PYG{n}{cos}\PYG{p}{(}\PYG{n}{phi}\PYG{o}{*}\PYG{n}{pi}\PYG{o}{/}\PYG{l+m+mi}{180}\PYG{p}{)}
+        \PYG{n}{yeye}\PYG{o}{=}\PYG{n}{r}\PYG{o}{*}\PYG{n}{sin}\PYG{p}{(}\PYG{n}{phi}\PYG{o}{*}\PYG{n}{pi}\PYG{o}{/}\PYG{l+m+mi}{180}\PYG{p}{)}
+        \PYG{n}{zeye}\PYG{o}{=}\PYG{n}{r}\PYG{o}{*}\PYG{n}{cos}\PYG{p}{(}\PYG{n}{theta}\PYG{o}{*}\PYG{n}{pi}\PYG{o}{/}\PYG{l+m+mi}{180}\PYG{p}{)}\PYG{o}{*}\PYG{n}{cos}\PYG{p}{(}\PYG{n}{phi}\PYG{o}{*}\PYG{n}{pi}\PYG{o}{/}\PYG{l+m+mi}{180}\PYG{p}{)}
+        \PYG{k}{if} \PYG{n}{left\PYGZus{}mouse\PYGZus{}button\PYGZus{}pressed}\PYG{p}{:}
+            \PYG{n}{theta} \PYG{o}{+=} \PYG{n}{delta\PYGZus{}x} \PYG{o}{*} \PYG{n}{pix2angle}
+            \PYG{n}{phi} \PYG{o}{+=} \PYG{n}{delta\PYGZus{}y} \PYG{o}{*} \PYG{n}{pix2angle}
+            \PYG{n}{phi} \PYG{o}{=} \PYG{n+nb}{max}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{90.0}\PYG{p}{,} \PYG{n+nb}{min}\PYG{p}{(}\PYG{l+m+mf}{90.0}\PYG{p}{,} \PYG{n}{phi}\PYG{p}{))}
+            \PYG{n}{theta} \PYG{o}{=} \PYG{n}{fmod}\PYG{p}{(}\PYG{n}{theta}\PYG{p}{,} \PYG{l+m+mf}{360.0}\PYG{p}{)}
+        \PYG{k}{if} \PYG{n}{right\PYGZus{}mouse\PYGZus{}button\PYGZus{}pressed}\PYG{p}{:}
+            \PYG{n}{r} \PYG{o}{+=} \PYG{n}{delta\PYGZus{}y} \PYG{o}{*} \PYG{n}{pix2angle}
+            \PYG{n}{r} \PYG{o}{+=} \PYG{n}{delta\PYGZus{}x} \PYG{o}{*} \PYG{n}{pix2angle}
+            \PYG{n}{r} \PYG{o}{=} \PYG{n+nb}{max}\PYG{p}{(}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{n+nb}{abs}\PYG{p}{(}\PYG{n}{r}\PYG{p}{))}
+            \PYG{n}{r} \PYG{o}{=} \PYG{n+nb}{min}\PYG{p}{(}\PYG{l+m+mf}{10.0}\PYG{p}{,} \PYG{n+nb}{abs}\PYG{p}{(}\PYG{n}{r}\PYG{p}{))}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{k}{if} \PYG{n}{left\PYGZus{}mouse\PYGZus{}button\PYGZus{}pressed}\PYG{p}{:}
+            \PYG{n}{thetas} \PYG{o}{+=} \PYG{n}{delta\PYGZus{}xs} \PYG{o}{*} \PYG{n}{pix2angle}
+            \PYG{n}{phis} \PYG{o}{+=} \PYG{n}{delta\PYGZus{}ys} \PYG{o}{*} \PYG{n}{pix2angle}
+
+        \PYG{k}{if} \PYG{n}{right\PYGZus{}mouse\PYGZus{}button\PYGZus{}pressed}\PYG{p}{:}
+            \PYG{n}{scale} \PYG{o}{+=} \PYG{n}{delta\PYGZus{}ys} \PYG{o}{*} \PYG{n}{pix2angle}\PYG{o}{/}\PYG{l+m+mi}{100}
+            \PYG{n}{scale} \PYG{o}{+=} \PYG{n}{delta\PYGZus{}xs} \PYG{o}{*} \PYG{n}{pix2angle}\PYG{o}{/}\PYG{l+m+mi}{100}
+
+    \PYG{n}{gluLookAt}\PYG{p}{(}\PYG{n}{xeye}\PYG{p}{,} \PYG{n}{yeye}\PYG{p}{,} \PYG{n}{zeye}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{)}
+    \PYG{n}{glRotatef}\PYG{p}{(}\PYG{n}{thetas}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{)}
+    \PYG{n}{glRotatef}\PYG{p}{(}\PYG{n}{phis}\PYG{p}{,} \PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{)}
+    \PYG{n}{glScalef}\PYG{p}{(}\PYG{n}{scale}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{)}
+
+    \PYG{n}{axes}\PYG{p}{()}
+    \PYG{n}{example\PYGZus{}object}\PYG{p}{()}
+
+    \PYG{n}{glFlush}\PYG{p}{()}
+\end{Verbatim}
